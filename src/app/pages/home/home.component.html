@@ -1,0 +1,203 @@
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="grid md:grid-cols-[65%_35%] gap-8">
+      <div
+        class="relative group overflow-hidden rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+      >
+        <owl-carousel-o [options]="customMainSlider">
+          @for (image of sliderImages; track image) {
+          <ng-template carouselSlide>
+            <div class="relative aspect-video overflow-hidden">
+              <img
+                [src]="image"
+                class="w-full h-full object-cover transform transition-all duration-500 scale-100 group-hover:scale-105"
+                alt="Slider Image"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent flex items-end p-6"
+              >
+                <div class="text-white space-y-1">
+                  <h3 class="text-2xl font-semibold tracking-tight">
+                    Seasonal Specials
+                  </h3>
+                  <p class="text-sm font-light opacity-90">
+                    Curated selections for your pantry
+                  </p>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 left-4 bg-white px-3 py-1 rounded-full text-sm font-medium text-gray-700 shadow-sm"
+              >
+                Featured Collection
+              </div>
+            </div>
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <div
+          class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+        >
+          <img
+            src="/images/grocery-banner.png"
+            class="w-full h-48 object-cover transform transition-all duration-500 scale-100 hover:scale-105"
+            alt="Fresh Produce"
+          />
+          <div
+            class="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-sm"
+          >
+            <h4 class="text-lg font-semibold text-gray-800">
+              Farm Fresh Vegetables
+            </h4>
+            <p class="text-sm text-gray-600 mt-1">
+              Daily harvested from local farms
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+        >
+          <img
+            src="/images/grocery-banner-2.jpeg"
+            class="w-full h-48 object-cover transform transition-all duration-500 scale-100 hover:scale-105"
+            alt="Organic Goods"
+          />
+          <div
+            class="absolute bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-sm"
+          >
+            <h4 class="text-lg font-semibold text-gray-800">
+              Organic Essentials
+            </h4>
+            <p class="text-sm text-gray-600 mt-1">Certified quality products</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-gradient-to-br from-slate-50 to-gray-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-14">
+      Popular
+      <span class="text-green-600 underline decoration-wavy">Categories</span>
+    </h2>
+
+    <div class="px-4">
+      <owl-carousel-o [options]="customOptions">
+        @for (category of categories; track category._id) {
+        <ng-template carouselSlide>
+          <div class="px-2">
+            <div
+              class="flex flex-col items-center p-6 bg-white shadow-xl rounded-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl border-2 border-green-100"
+            >
+              <div
+                class="w-32 h-32 overflow-hidden rounded-full border-4 border-green-500 shadow-lg"
+              >
+                <img
+                  [src]="category.image"
+                  class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  alt="{{ category.name }}"
+                />
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 mt-5 px-4 text-center">
+                {{ category.name }}
+              </h3>
+            </div>
+          </div>
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-14">
+      Trending
+      <span class="text-green-600 underline decoration-wavy">Products</span>
+    </h2>
+
+    <div class="max-w-2xl mx-auto mb-16">
+      <div class="relative">
+        <input
+          [(ngModel)]="searchText"
+          type="text"
+          placeholder="Search products..."
+          class="w-full pl-14 pr-6 py-4 text-lg rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 shadow-sm transition-all"
+        />
+        <i
+          class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl"
+        ></i>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      @for (product of products.slice(0,12) | search : searchText; track
+      product.id) {
+      <div
+        class="group bg-white border border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+      >
+        <button
+          (click)="toggleWishlist(product._id)"
+          class="absolute top-4 right-4 z-10 p-3 bg-white/90 backdrop-blur rounded-full shadow-md hover:bg-red-50 transition-colors duration-300"
+          [class.text-red-500]="wishlistIds().includes(product._id)"
+        >
+          <i class="fas fa-heart text-xl"></i>
+        </button>
+
+        <div
+          class="relative aspect-square overflow-hidden rounded-xl cursor-pointer mb-6"
+          [routerLink]="['/details', product._id]"
+        >
+          <img
+            [src]="product.imageCover"
+            [alt]="product.title"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"
+          ></div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span
+              class="text-sm font-semibold text-green-600 uppercase tracking-wide"
+            >
+              {{ product.category.name }}
+            </span>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-star text-sm text-yellow-400"></i>
+              <span class="text-gray-600 font-medium">
+                {{ product.ratingsAverage.toFixed(1) }}
+              </span>
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900 leading-snug">
+            {{ product.title.split(" ", 2).join(" ") }}
+          </h3>
+
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-gray-900">
+              {{ product.price | currency : "EGP" }}
+            </span>
+            <button
+              (click)="addTocart(product.id)"
+              class="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              <i class="fas fa-shopping-cart"></i>
+              <span>Add</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

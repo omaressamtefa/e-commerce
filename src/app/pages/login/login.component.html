@@ -1,0 +1,143 @@
+<section
+  class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 border border-gray-100 hover:shadow-3xl transition-all duration-300"
+>
+  <!-- Header Section -->
+  <div class="text-center space-y-2 mb-10">
+    <h1
+      class="text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent"
+    >
+      {{ "login.loginNow" | translate }}
+    </h1>
+    <p class="text-gray-500 text-lg">{{ "login.p" | translate }}</p>
+  </div>
+
+  <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+    <!-- Email Field -->
+    <div class="space-y-2">
+      <label for="email" class="block text-sm font-medium text-gray-600">
+        {{ "login.email" | translate }}
+      </label>
+      <div class="relative">
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          autocomplete="email"
+          class="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 placeholder-gray-400 transition-all pr-14"
+          placeholder="example@domain.com"
+        />
+        <i
+          class="fas fa-envelope absolute right-5 top-4 text-gray-400 text-xl"
+        ></i>
+      </div>
+      @if(loginForm.get('email')?.errors && loginForm.get('email')?.touched) {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg mt-2"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <div>
+          @if (loginForm.get('email')?.hasError('required')) {
+          <p>Email is required</p>
+          } @if (loginForm.get('email')?.hasError('email')) {
+          <p>Please enter a valid email</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Password Field -->
+    <div class="space-y-2">
+      <label for="password" class="block text-sm font-medium text-gray-600">
+        {{ "login.password" | translate }}
+      </label>
+      <div class="relative">
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          autocomplete="current-password"
+          class="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100 placeholder-gray-400 transition-all pr-14"
+          placeholder="••••••••"
+        />
+        <i class="fas fa-lock absolute right-5 top-4 text-gray-400 text-xl"></i>
+      </div>
+      @if(loginForm.get('password')?.errors &&
+      loginForm.get('password')?.touched) {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg mt-2"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <div>
+          @if (loginForm.get('password')?.hasError('required')) {
+          <p>Password is required</p>
+          } @if (loginForm.get('password')?.hasError('pattern')) {
+          <p>8+ characters with letters & numbers</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      [disabled]="isLoading"
+      class="w-full py-4 px-6 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-emerald-600 hover:to-green-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative group"
+      type="submit"
+    >
+      <span class="relative z-10" [class.opacity-0]="isLoading">
+        {{ "login.signIn" | translate }}
+      </span>
+      @if (isLoading) {
+      <i
+        class="absolute inset-0 flex items-center justify-center fa-spin fas fa-spinner z-10"
+      ></i>
+      }
+      <div
+        class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"
+      ></div>
+    </button>
+
+    <!-- Additional Links -->
+    <div
+      class="flex flex-col md:flex-row justify-between items-center gap-4 pt-4"
+    >
+      <a
+        routerLink="/register"
+        class="text-emerald-600 hover:text-emerald-800 font-medium transition-colors flex items-center gap-2 group"
+      >
+        <i
+          class="fas fa-user-plus text-lg group-hover:scale-110 transition-transform"
+        ></i>
+        <span
+          class="border-b border-transparent group-hover:border-emerald-600"
+        >
+          {{ "login.signUp" | translate }}
+        </span>
+      </a>
+
+      <a
+        routerLink="/resetPassword"
+        class="text-emerald-600 hover:text-emerald-800 font-medium transition-colors flex items-center gap-2 group"
+      >
+        <i
+          class="fas fa-lock text-lg group-hover:scale-110 transition-transform"
+        ></i>
+        <span
+          class="border-b border-transparent group-hover:border-emerald-600"
+        >
+          {{ "login.forgotPassword" | translate }}
+        </span>
+      </a>
+    </div>
+
+    @if (msgError) {
+    <div
+      class="flex items-center p-4 text-sm text-white bg-red-600/95 rounded-xl border border-red-700 mt-4 animate-pulse"
+    >
+      <i class="fas fa-exclamation-triangle mr-3"></i>
+      <span>{{ msgError }}</span>
+    </div>
+    }
+  </form>
+</section>

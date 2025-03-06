@@ -1,0 +1,76 @@
+<section class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h1 class="text-center text-green-600 text-3xl font-bold mb-4">Checkout</h1>
+  <form [formGroup]="checkoutForm" (ngSubmit)="submitForm()">
+    <div class="mb-4">
+      <label
+        for="details"
+        class="block mb-1 text-sm font-semibold text-gray-900"
+        >Details</label
+      >
+      <textarea
+        formControlName="details"
+        id="details"
+        class="w-full p-2.5 rounded-lg border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+      ></textarea>
+      <p
+        class="text-red-500 text-xs mt-1"
+        *ngIf="
+          checkoutForm.controls['details'].invalid &&
+          checkoutForm.controls['details'].touched
+        "
+      >
+        Details must be at least 10 characters.
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <label for="phone" class="block mb-1 text-sm font-semibold text-gray-900"
+        >Phone</label
+      >
+      <input
+        formControlName="phone"
+        id="phone"
+        class="w-full p-2.5 rounded-lg border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+      />
+      <p
+        class="text-red-500 text-xs mt-1"
+        *ngIf="
+          checkoutForm.controls['phone'].invalid &&
+          checkoutForm.controls['phone'].touched
+        "
+      >
+        Enter a valid Egyptian phone number (e.g., 01012345678).
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <label for="city" class="block mb-1 text-sm font-semibold text-gray-900"
+        >City</label
+      >
+      <input
+        formControlName="city"
+        id="city"
+        class="w-full p-2.5 rounded-lg border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+      />
+      <p
+        class="text-red-500 text-xs mt-1"
+        *ngIf="
+          checkoutForm.controls['city'].invalid &&
+          checkoutForm.controls['city'].touched
+        "
+      >
+        City is required.
+      </p>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full p-2.5 rounded-lg font-semibold text-white transition-colors duration-300"
+      [class.bg-gray-400]="checkoutForm.invalid"
+      [class.bg-green-600]="checkoutForm.valid"
+      [disabled]="checkoutForm.invalid"
+    >
+      Online Payment
+    </button>
+  </form>
+</section>

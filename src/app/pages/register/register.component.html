@@ -1,0 +1,203 @@
+<section
+  class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300"
+>
+  <!-- Header Section -->
+  <div class="text-center space-y-2 mb-8">
+    <h1
+      class="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent"
+    >
+      Create Your Account
+    </h1>
+  </div>
+
+  <form class="space-y-5" [formGroup]="register" (ngSubmit)="submitForm()">
+    <!-- Name Field -->
+    <div class="space-y-2">
+      <label for="name" class="block text-sm font-medium text-gray-600"
+        >Full Name</label
+      >
+      <div class="relative">
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          autocomplete="name"
+          class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 placeholder-gray-400 pr-12"
+          placeholder="John Doe"
+        />
+        <i class="fas fa-user absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      @if(register.get('name')?.errors && register.get('name')?.touched) {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <div>
+          @if (register.get('name')?.hasError('required')) {
+          <p>Name is required</p>
+          } @if (register.get('name')?.hasError('minlength')) {
+          <p>Minimum 3 characters required</p>
+          } @if (register.get('name')?.hasError('maxlength')) {
+          <p>Maximum 20 characters allowed</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Email Field -->
+    <div class="space-y-2">
+      <label for="email" class="block text-sm font-medium text-gray-600"
+        >Email Address</label
+      >
+      <div class="relative">
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          autocomplete="email"
+          class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 placeholder-gray-400 pr-12"
+          placeholder="john@example.com"
+        />
+        <i class="fas fa-envelope absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      @if(register.get('email')?.errors && register.get('email')?.touched) {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <div>
+          @if (register.get('email')?.hasError('required')) {
+          <p>Email is required</p>
+          } @if (register.get('email')?.hasError('email')) {
+          <p>Please enter a valid email</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Password Field -->
+    <div class="space-y-2">
+      <label for="password" class="block text-sm font-medium text-gray-600"
+        >Password</label
+      >
+      <div class="relative">
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          autocomplete="new-password"
+          class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 placeholder-gray-400 pr-12"
+          placeholder="••••••••"
+        />
+        <i class="fas fa-lock absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      @if(register.get('password')?.errors && register.get('password')?.touched)
+      {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <div>
+          @if (register.get('password')?.hasError('required')) {
+          <p>Password is required</p>
+          } @if (register.get('password')?.hasError('pattern')) {
+          <p>8+ characters with letters & numbers</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Confirm Password Field -->
+    <div class="space-y-2">
+      <label for="repassword" class="block text-sm font-medium text-gray-600"
+        >Confirm Password</label
+      >
+      <div class="relative">
+        <input
+          formControlName="rePassword"
+          type="password"
+          id="repassword"
+          autocomplete="new-password"
+          class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 placeholder-gray-400 pr-12"
+          placeholder="••••••••"
+        />
+        <i class="fas fa-lock absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      @if(register.hasError('mismatch') && register.get('rePassword')?.touched)
+      {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <p>Passwords do not match</p>
+      </div>
+      }
+    </div>
+
+    <!-- Phone Field -->
+    <div class="space-y-2">
+      <label for="phone" class="block text-sm font-medium text-gray-600"
+        >Phone Number</label
+      >
+      <div class="relative">
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          autocomplete="tel"
+          class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 placeholder-gray-400 pr-12"
+          placeholder="+1 234 567 890"
+        />
+        <i class="fas fa-phone absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      @if(register.get('phone')?.errors && register.get('phone')?.touched) {
+      <div
+        class="flex items-center p-3 text-sm text-red-600 bg-red-50/90 rounded-lg"
+      >
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <div>
+          @if (register.get('phone')?.hasError('required')) {
+          <p>Phone number is required</p>
+          } @if (register.get('phone')?.hasError('pattern')) {
+          <p>Please enter a valid phone number</p>
+          }
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      [disabled]="isLoading"
+      class="w-full py-3.5 px-6 bg-gradient-to-r from-green-600 to-emerald-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all relative"
+      type="submit"
+    >
+      <span [class.opacity-0]="isLoading">Create Account</span>
+      @if (isLoading) {
+      <i
+        class="absolute inset-0 flex items-center justify-center fa-spin fas fa-spinner"
+      ></i>
+      }
+    </button>
+
+    <!-- Status Messages -->
+    @if (msgError) {
+    <div
+      class="flex items-center p-4 text-sm text-white bg-red-600/95 rounded-xl border border-red-700 animate-pulse"
+    >
+      <i class="fas fa-exclamation-triangle mr-3"></i>
+      <span>{{ msgError }}</span>
+    </div>
+    } @if (isSuccess) {
+    <div
+      class="flex items-center p-4 text-sm text-white bg-emerald-600/95 rounded-xl border border-emerald-700"
+    >
+      <i class="fas fa-check-circle mr-3"></i>
+      <span>Account created successfully!</span>
+    </div>
+    }
+  </form>
+</section>

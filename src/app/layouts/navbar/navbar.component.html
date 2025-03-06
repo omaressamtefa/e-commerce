@@ -1,0 +1,181 @@
+<nav
+  class="bg-white border-b border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-800"
+>
+  <div
+    class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between"
+  >
+    <div class="flex items-center gap-6">
+      <a routerLink="/home" class="flex items-center space-x-3">
+        <img
+          src="/images/freshcart-logo.svg"
+          alt="FreshCart Logo"
+          class="h-12"
+        />
+      </a>
+
+      @if (isLogin()) {
+      <div class="hidden md:flex justify-center space-x-4">
+        <a
+          routerLink="/home"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.home" | translate }}
+        </a>
+        <a
+          routerLink="/products"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.products" | translate }}
+        </a>
+        <a
+          routerLink="/categories"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.categories" | translate }}
+        </a>
+        <a
+          routerLink="/brands"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.brands" | translate }}
+        </a>
+        <a
+          routerLink="/wishlist"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.wishlist" | translate }}
+        </a>
+      </div>
+      }
+    </div>
+
+    <div class="hidden md:flex items-center gap-6">
+      <div
+        class="flex space-x-2 bg-gray-200 dark:bg-gray-800 p-2 rounded-md shadow-sm"
+      >
+        <button
+          (click)="change('en')"
+          [class.active-lang]="currentLang('en')"
+          class="px-4 py-2 font-bold rounded-md transition hover:bg-green-600 hover:text-white"
+        >
+          EN
+        </button>
+        <button
+          (click)="change('ar')"
+          [class.active-lang]="currentLang('ar')"
+          class="px-4 py-2 font-bold rounded-md transition hover:bg-green-600 hover:text-white"
+        >
+          AR
+        </button>
+      </div>
+
+      @if (!isLogin()) {
+
+      <div class="flex gap-6">
+        <a
+          routerLink="/login"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.login" | translate }}
+        </a>
+        <a
+          routerLink="/register"
+          class="nav-link font-semibold hover:text-green-600 transition"
+        >
+          {{ "navbar.register" | translate }}
+        </a>
+      </div>
+      } @else {
+
+      <div class="flex items-center gap-6">
+        <a routerLink="/cart" class="relative">
+          <i
+            class="fas fa-cart-shopping text-3xl text-gray-700 dark:text-gray-300 hover:text-green-600 transition"
+          ></i>
+          <span
+            class="absolute -top-2 -left-2 bg-green-600 text-white text-sm font-bold rounded-full w-7 h-7 flex items-center justify-center"
+          >
+            {{ countCart() }}
+          </span>
+        </a>
+        <button
+          (click)="logout()"
+          class="nav-link font-semibold text-gray-700 dark:text-gray-300 hover:text-red-600 transition"
+        >
+          {{ "navbar.signout" | translate }}
+        </button>
+      </div>
+      }
+    </div>
+
+    <button (click)="isMenuOpen = !isMenuOpen" class="md:hidden text-3xl">
+      ☰
+    </button>
+  </div>
+
+  <div
+    [class.hidden]="!isMenuOpen"
+    class="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 flex flex-col items-center text-center py-4 space-y-4"
+  >
+    @if (isLogin()) {
+
+    <a
+      routerLink="/home"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.home" | translate }}
+    </a>
+    <a
+      routerLink="/products"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.products" | translate }}
+    </a>
+    <a
+      routerLink="/categories"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.categories" | translate }}
+    </a>
+    <a
+      routerLink="/brands"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.brands" | translate }}
+    </a>
+    <a
+      routerLink="/wishlist"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.wishlist" | translate }}
+    </a>
+    <button
+      (click)="logout(); isMenuOpen = false"
+      class="nav-link font-semibold text-lg text-gray-700 dark:text-gray-300 hover:text-red-600 transition"
+    >
+      {{ "navbar.signout" | translate }}
+    </button>
+    } @else {
+
+    <a
+      routerLink="/login"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.login" | translate }}
+    </a>
+    <a
+      routerLink="/register"
+      (click)="isMenuOpen = false"
+      class="nav-link font-semibold text-lg hover:text-green-600 transition"
+    >
+      {{ "navbar.register" | translate }}
+    </a>
+    }
+  </div>
+</nav>

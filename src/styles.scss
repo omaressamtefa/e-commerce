@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+@import "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default";
+@import "ngx-toastr/toastr";
+
+.btn-main {
+  @apply relative overflow-hidden mx-auto text-white text-lg font-extrabold px-6 py-3 rounded-lg transition-all duration-300 ease-in-out w-4/5 flex items-center justify-center;
+
+  background: linear-gradient(45deg, #047857, #059669); // Darker green gradient
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    @apply absolute inset-0 transition-opacity duration-300 opacity-0;
+    background: linear-gradient(
+      45deg,
+      #065f46,
+      #047857
+    ); // Even darker green on hover
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  &:hover {
+    @apply scale-90 shadow-lg;
+
+    &::before {
+      @apply opacity-100;
+    }
+  }
+
+  @keyframes payment-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  &:hover::after {
+    content: "";
+    @apply absolute inset-0 rounded-lg opacity-50;
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(16, 185, 129, 0.4) 50%,
+      // Darker shimmer effect
+      transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: payment-shimmer 2s linear infinite;
+    z-index: -1;
+  }
+}
+
+.m-sec-style {
+  @apply bg-gray-50 border rounded p-4 shadow;
+}
+body {
+  font-family: "Oswald", serif;
+}
+.nav-link {
+  @apply block py-2 px-4 text-gray-700 rounded-md hover:bg-green-50 hover:text-green-600 transition-all dark:text-gray-300 dark:hover:bg-gray-800;
+}
+.lang-btn {
+  @apply px-4 py-2 text-sm font-semibold rounded-md transition duration-300;
+
+  /* Light Mode */
+  @apply bg-gray-300 text-gray-800 hover:bg-gray-400;
+
+  /* Dark Mode */
+  @apply dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600;
+
+  /* Active State */
+  &.active-lang {
+    @apply bg-green-600 text-white font-bold dark:bg-green-500;
+  }
+  .wishlist-btn {
+    @apply text-2xl transition-all focus:outline-none hover:text-red-500;
+
+    .fa-heart {
+      @apply transition-colors duration-300;
+    }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .center-xy {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
