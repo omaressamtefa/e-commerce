@@ -99,7 +99,6 @@ export const routes: Routes = [
             (m) => m.CheckoutComponent
           ),
         title: 'checkout',
-        canActivate: [authGuard],
       },
       {
         path: 'wishlist',
@@ -116,8 +115,7 @@ export const routes: Routes = [
           import('./pages/details/details.component').then(
             (m) => m.DetailsComponent
           ),
-        title: 'Deatils',
-        canActivate: [authGuard],
+        title: 'Details',
       },
       {
         path: '**',
