@@ -116,6 +116,7 @@ export const routes: Routes = [
             (m) => m.DetailsComponent
           ),
         title: 'Details',
+        canActivate: [authGuard],
       },
       {
         path: '**',
