@@ -99,6 +99,7 @@ export const routes: Routes = [
             (m) => m.CheckoutComponent
           ),
         title: 'checkout',
+        canActivate: [authGuard],
       },
       {
         path: 'wishlist',
