@@ -46,7 +46,7 @@ export class CheckoutComponent implements OnInit {
       .checkOutSession(this.cartId, this.checkoutForm.value)
       .subscribe({
         next: (res) => {
-          console.log(res.data);
+          console.log(res);
           if (res.status === 'success') {
             open(res.session.url, '_self');
             setTimeout(() => {
