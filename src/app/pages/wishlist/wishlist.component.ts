@@ -57,9 +57,7 @@ export class WishlistComponent implements OnInit {
     this.cartService.addProductToCart(id).subscribe({
       next: (res) => {
         this.cartService.cartNumber.set(res.numOfCartItems);
-        this.wishlistService.wishlistDetails.update((items) =>
-          items.filter((item) => item.id !== id)
-        );
+        this.removeFromWishlist(id);
         this.toastrService.success(res.message, 'FreshCart');
       },
       error: (err) => {
