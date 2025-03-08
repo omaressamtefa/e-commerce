@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ICategory } from '../../shared/interfaces/icategory';
 import { CategoriesService } from '../../core/services/categories/categories.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss',
 })

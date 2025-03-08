@@ -1,30 +1,42 @@
 @if(cardDetails.totalCartPrice) {
 <section
-  class="min-h-screen bg-gradient-to-br from-gray-50 to-green-50 py-12 px-4 sm:px-6 lg:px-8"
+  class="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8"
 >
   <div
-    class="max-w-4xl mx-auto bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200/50"
+    class="max-w-4xl mx-auto bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200/50 transform perspective-1000"
   >
-    <div class="text-center mb-10">
+    <div class="text-center mb-10 relative overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-indigo-100 to-green-100 blur-3xl opacity-30"
+      ></div>
       <h1
-        class="text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent mb-4"
+        class="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-green-500 bg-clip-text text-transparent mb-4 inline-block animate-float"
       >
-        Your Shopping Cart
+        Cart Content
       </h1>
       <div
-        class="flex justify-between items-center bg-green-50/80 backdrop-blur-sm p-4 rounded-xl shadow-inner"
+        class="flex justify-between items-center bg-indigo-50/80 backdrop-blur-sm p-4 rounded-xl shadow-inner border border-indigo-100"
       >
-        <div class="flex items-center gap-2">
-          <i class="fas fa-coins text-2xl text-emerald-600"></i>
+        <div class="flex items-center gap-3">
+          <div
+            class="relative w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center"
+          >
+            <i
+              class="fas fa-shopping-basket text-white text-xl animate-bounce"
+            ></i>
+            <div
+              class="absolute -inset-1.5 border-2 border-indigo-200 rounded-full animate-ping-slow"
+            ></div>
+          </div>
           <h3 class="text-2xl font-semibold text-gray-800">
             {{ cardDetails.totalCartPrice | currency : "EGP" }}
           </h3>
         </div>
         <button
           (click)="clearCart()"
-          class="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all"
+          class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-600 to-orange-500 text-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
         >
-          <i class="fas fa-trash-can"></i>
+          <i class="fas fa-trash-can-shake animate-shake"></i>
           <span>Clear Cart</span>
         </button>
       </div>
@@ -33,13 +45,15 @@
     <div class="space-y-6">
       @for(prod of cardDetails.products; track prod) {
       <div
-        class="group relative flex items-center gap-6 bg-white/95 backdrop-blur-sm p-6 rounded-xl border border-gray-200 hover:border-green-200 shadow-sm hover:shadow-md transition-all"
+        class="group relative flex items-center gap-6 bg-white/95 backdrop-blur-sm p-6 rounded-xl border border-gray-200 hover:border-indigo-200 shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1"
       >
-        <div class="relative w-32 h-32 overflow-hidden rounded-xl shadow-lg">
+        <div
+          class="relative w-32 h-32 overflow-hidden rounded-xl shadow-lg transform-style-preserve-3d group-hover:rotate-y-10 transition-transform"
+        >
           <img
             [src]="prod.product.imageCover"
             [alt]="prod.product.title"
-            class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
           />
           <div
             class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
@@ -50,19 +64,25 @@
           class="flex-1 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"
         >
           <div class="space-y-1">
-            <h3 class="text-xl font-semibold text-gray-900">
+            <h3
+              class="text-xl font-semibold text-gray-900 hover:text-indigo-600 transition-colors"
+            >
               {{ prod.product.title }}
             </h3>
-            <p class="text-lg font-medium text-emerald-600">
+            <p
+              class="text-lg font-medium bg-gradient-to-r from-indigo-600 to-green-500 bg-clip-text text-transparent"
+            >
               {{ prod.price | currency : "EGP" }}
             </p>
           </div>
 
           <div class="flex items-center gap-4">
-            <div class="flex items-center gap-3 bg-gray-100 rounded-full p-1.5">
+            <div
+              class="flex items-center gap-2 bg-gray-100 rounded-full p-1.5 shadow-inner"
+            >
               <button
                 (click)="updateItem(prod.product.id, prod.count - 1)"
-                class="w-10 h-10 flex items-center justify-center bg-white text-red-600 rounded-full shadow-md hover:bg-red-50 transition-colors"
+                class="w-10 h-10 flex items-center justify-center bg-white text-red-600 rounded-full shadow-md hover:bg-red-50 hover:scale-105 transition-all"
                 [disabled]="prod.count === 1"
               >
                 <i class="fas fa-minus text-sm"></i>
@@ -72,14 +92,14 @@
               </span>
               <button
                 (click)="updateItem(prod.product.id, prod.count + 1)"
-                class="w-10 h-10 flex items-center justify-center bg-white text-green-600 rounded-full shadow-md hover:bg-green-50 transition-colors"
+                class="w-10 h-10 flex items-center justify-center bg-white text-green-600 rounded-full shadow-md hover:bg-green-50 hover:scale-105 transition-all"
               >
                 <i class="fas fa-plus text-sm"></i>
               </button>
             </div>
             <button
               (click)="removeItem(prod.product.id)"
-              class="p-2 text-red-600 hover:text-red-700 transition-colors"
+              class="p-2 text-red-600 hover:text-red-700 transition-colors animate-pulse-once"
               title="Remove item"
             >
               <i class="fas fa-trash-alt"></i>
@@ -89,41 +109,58 @@
       </div>
       }
     </div>
+
     <div class="mt-12 border-t border-gray-200 pt-8">
       <div class="flex flex-col items-center gap-6">
         <button
           [routerLink]="['/checkout', cardDetails._id]"
-          class="w-full max-w-xs px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-500 text-white text-xl font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all"
+          class="w-full max-w-xs px-8 py-4 bg-gradient-to-r from-indigo-600 to-green-500 text-white text-xl font-semibold rounded-xl shadow-2xl hover:shadow-3xl hover:scale-[1.02] transition-all relative overflow-hidden"
         >
-          <i class="fas fa-wallet mr-2"></i>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 hover:opacity-100 transition-opacity"
+          ></div>
+          <i class="fas fa-lock mr-2"></i>
           Secure Checkout
         </button>
-        <p class="text-gray-500 text-sm">
-          <i class="fas fa-lock mr-1.5"></i>
-          SSL Encrypted Payment Processing
-        </p>
+        <div class="flex items-center gap-2 text-gray-500">
+          <i class="fas fa-shield-check"></i>
+          <span class="text-sm">256-bit SSL Encryption</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 } @else {
+
 <div
-  class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-green-50"
+  class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-indigo-50"
 >
-  <div class="text-center space-y-8 max-w-2xl px-4">
-    <div class="inline-block animate-bounce">
-      <i class="fas fa-cart-shopping text-9xl text-gray-300"></i>
+  <div class="text-center space-y-8 max-w-2xl px-4 relative">
+    <div class="inline-block animate-float">
+      <div class="relative w-48 h-48">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-indigo-200 to-green-200 rounded-full blur-2xl opacity-50"
+        ></div>
+        <i
+          class="fas fa-cart-circle-exclamation text-9xl text-indigo-400 relative z-10"
+        ></i>
+      </div>
     </div>
-    <h1 class="text-4xl font-bold text-gray-800">Your Cart Feels Lonely</h1>
-    <p class="text-xl text-gray-600 mb-8">
-      Discover amazing products to fill it up!
+    <h1
+      class="text-4xl font-bold text-gray-800 bg-gradient-to-r from-indigo-600 to-green-500 bg-clip-text text-transparent"
+    >
+      Cart Vacancy
+    </h1>
+    <p class="text-xl text-gray-600 mb-8 max-w-md mx-auto">
+      Your cart is currently staging a peaceful protest - fill it with amazing
+      finds!
     </p>
     <button
       routerLink="/products"
-      class="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-xl shadow-lg hover:shadow-xl transition-all"
+      class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-green-500 text-white rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
     >
       <i class="fas fa-bag-shopping mr-2"></i>
-      Start Shopping
+      Commence Shopping
     </button>
   </div>
 </div>

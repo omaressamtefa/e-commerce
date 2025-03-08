@@ -1,76 +1,121 @@
-<section class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
-  <h1 class="text-center text-green-600 text-3xl font-bold mb-4">Checkout</h1>
-  <form [formGroup]="checkoutForm" (ngSubmit)="submitForm()">
-    <div class="mb-4">
-      <label
-        for="details"
-        class="block mb-1 text-sm font-semibold text-gray-900"
-        >Details</label
-      >
+<section
+  class="max-w-xl mx-auto p-8 bg-gradient-to-br from-white to-indigo-50 shadow-2xl rounded-2xl border border-indigo-100"
+>
+  <div class="text-center mb-8">
+    <h1
+      class="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent inline-flex items-center gap-2"
+    >
+      <i class="fas fa-lock text-3xl text-indigo-600"></i>
+      Secure Checkout
+    </h1>
+    <p class="text-indigo-600/80 mt-2">Safe and encrypted payment processing</p>
+  </div>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="submitForm()" class="space-y-6">
+    <div class="relative group">
       <textarea
         formControlName="details"
         id="details"
-        class="w-full p-2.5 rounded-lg border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-3 rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 peer transition-all h-32"
+        placeholder=" "
       ></textarea>
-      <p
-        class="text-red-500 text-xs mt-1"
-        *ngIf="
-          checkoutForm.controls['details'].invalid &&
-          checkoutForm.controls['details'].touched
-        "
+      <label
+        for="details"
+        class="absolute left-4 text-indigo-400 pointer-events-none transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-indigo-600 -top-2.5 text-sm bg-white px-1"
       >
-        Details must be at least 10 characters.
-      </p>
+        Order Notes
+      </label>
+      <div class="flex items-center mt-1 space-x-1">
+        <i class="fas fa-info-circle text-indigo-600"></i>
+        <span class="text-sm text-indigo-500/80"
+          >Special instructions or notes</span
+        >
+      </div>
+      @if (checkoutForm.get('details')?.invalid &&
+      checkoutForm.get('details')?.touched) {
+      <div
+        @slideInOut
+        class="mt-2 p-2 bg-red-50 rounded-lg flex items-center gap-2 text-red-600"
+      >
+        <i class="fas fa-exclamation-circle"></i>
+        <span class="text-sm">Details must be at least 10 characters</span>
+      </div>
+      }
     </div>
 
-    <div class="mb-4">
-      <label for="phone" class="block mb-1 text-sm font-semibold text-gray-900"
-        >Phone</label
+    <div class="relative group">
+      <div class="flex items-center gap-2">
+        <span class="text-indigo-400">+20</span>
+        <input
+          formControlName="phone"
+          id="phone"
+          class="w-full px-4 py-3 rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 peer"
+          placeholder=" "
+        />
+        <label
+          for="phone"
+          class="absolute left-12 text-indigo-400 pointer-events-none transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-indigo-600 -top-2.5 text-sm bg-white px-1"
+        >
+          Phone Number
+        </label>
+      </div>
+      @if (checkoutForm.get('phone')?.invalid &&
+      checkoutForm.get('phone')?.touched) {
+      <div
+        @slideInOut
+        class="mt-2 p-2 bg-red-50 rounded-lg flex items-center gap-2 text-red-600"
       >
-      <input
-        formControlName="phone"
-        id="phone"
-        class="w-full p-2.5 rounded-lg border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-      />
-      <p
-        class="text-red-500 text-xs mt-1"
-        *ngIf="
-          checkoutForm.controls['phone'].invalid &&
-          checkoutForm.controls['phone'].touched
-        "
-      >
-        Enter a valid Egyptian phone number (e.g., 01012345678).
-      </p>
+        <i class="fas fa-exclamation-circle"></i>
+        <span class="text-sm"
+          >Valid Egyptian number required (e.g. 1012345678)</span
+        >
+      </div>
+      }
     </div>
 
-    <div class="mb-4">
-      <label for="city" class="block mb-1 text-sm font-semibold text-gray-900"
-        >City</label
-      >
+    <div class="relative group">
       <input
         formControlName="city"
         id="city"
-        class="w-full p-2.5 rounded-lg border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+        class="w-full px-4 py-3 rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 peer"
+        placeholder=" "
       />
-      <p
-        class="text-red-500 text-xs mt-1"
-        *ngIf="
-          checkoutForm.controls['city'].invalid &&
-          checkoutForm.controls['city'].touched
-        "
+      <label
+        for="city"
+        class="absolute left-4 text-indigo-400 pointer-events-none transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-indigo-600 -top-2.5 text-sm bg-white px-1"
       >
-        City is required.
-      </p>
+        Delivery City
+      </label>
+      @if (checkoutForm.get('city')?.invalid &&
+      checkoutForm.get('city')?.touched) {
+      <div
+        @slideInOut
+        class="mt-2 p-2 bg-red-50 rounded-lg flex items-center gap-2 text-red-600"
+      >
+        <i class="fas fa-exclamation-circle"></i>
+        <span class="text-sm">Please enter your city</span>
+      </div>
+      }
     </div>
 
     <button
       type="submit"
-      class="w-full p-2.5 rounded-lg font-semibold text-white transition-colors duration-300"
-      [class.bg-gray-400]="checkoutForm.invalid"
-      [class.bg-green-600]="checkoutForm.valid"
+      class="w-full py-4 rounded-xl font-bold text-white transition-all duration-300 relative overflow-hidden"
+      [class.shadow-lg]="checkoutForm.valid"
+      [class.opacity-50]="checkoutForm.invalid"
+      [class.bg-gradient-to-r]="checkoutForm.valid"
+      [class.from-indigo-600]="checkoutForm.valid"
+      [class.to-purple-500]="checkoutForm.valid"
+      [class.bg-indigo-400]="checkoutForm.invalid"
       [disabled]="checkoutForm.invalid"
     >
-      Online Payment
+      <div class="relative z-10 flex items-center justify-center gap-2">
+        <i class="fas fa-lock"></i>
+        <span>Complete Payment</span>
+      </div>
+      <div
+        class="absolute inset-0 bg-indigo-800/5 hover:bg-transparent transition-colors"
+      ></div>
     </button>
   </form>
 </section>

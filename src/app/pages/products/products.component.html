@@ -1,85 +1,98 @@
-<section class="py-20 bg-white">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-14">
-      Trending
-      <span class="text-green-600 underline decoration-wavy">Products</span>
-    </h2>
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <header class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+        Trending
+        <span
+          class="text-indigo-600 underline decoration-2 underline-offset-8 decoration-wavy"
+        >
+          Products
+        </span>
+      </h2>
+      <p class="text-gray-600 md:text-lg max-w-2xl mx-auto">
+        Discover our most popular items loved by customers
+      </p>
+    </header>
 
-    <div class="max-w-2xl mx-auto mb-16">
+    <div class="max-w-3xl mx-auto mb-12">
       <div class="relative">
         <input
           [(ngModel)]="searchText"
-          type="text"
+          type="search"
           placeholder="Search products..."
-          class="w-full pl-14 pr-6 py-4 text-lg rounded-xl border-2 border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 shadow-sm transition-all"
+          aria-label="Product search"
+          class="w-full pl-14 pr-5 py-3.5 text-base rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 shadow-sm transition-all"
         />
         <i
-          class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl"
+          class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-indigo-500 text-lg"
         ></i>
       </div>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       @for (product of products.slice(0,12) | search : searchText; track
       product.id) {
-      <div
-        class="group bg-white border border-gray-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
+      <article
+        class="group bg-white border border-indigo-50 rounded-xl p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
       >
         <button
           (click)="toggleWishlist(product._id)"
-          class="absolute top-4 right-4 z-10 p-3 bg-white/90 backdrop-blur rounded-full shadow-md hover:bg-red-50 transition-colors duration-300"
-          [class.text-red-500]="wishlistIds().includes(product._id)"
+          aria-label="Toggle wishlist"
+          class="absolute top-3.5 right-3.5 z-10 p-2.5 bg-white/90 backdrop-blur rounded-full shadow-sm hover:bg-red-50 transition-colors"
+          [class.text-red-600]="wishlistIds().includes(product._id)"
         >
-          <i class="fas fa-heart text-xl"></i>
+          <i class="fas fa-heart text-lg"></i>
         </button>
 
-        <div
-          class="relative aspect-square overflow-hidden rounded-xl cursor-pointer mb-6"
+        <a
           [routerLink]="['/details', product._id]"
+          class="block relative aspect-square overflow-hidden rounded-xl mb-5"
         >
           <img
             [src]="product.imageCover"
             [alt]="product.title"
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+            loading="lazy"
           />
           <div
             class="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"
           ></div>
-        </div>
+        </a>
 
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span
-              class="text-sm font-semibold text-green-600 uppercase tracking-wide"
+              class="text-sm font-semibold text-indigo-600 uppercase tracking-wide"
             >
-              {{ product.category.name }}
+              {{ product.category?.name || "Uncategorized" }}
             </span>
-            <div class="flex items-center space-x-1">
-              <i class="fas fa-star text-sm text-yellow-400"></i>
-              <span class="text-gray-600 font-medium">
-                {{ product.ratingsAverage.toFixed(1) }}
+            <div class="flex items-center space-x-1.5">
+              <i class="fas fa-star text-sm text-amber-400"></i>
+              <span class="text-gray-700 font-medium">
+                {{ (product.ratingsAverage || 0).toFixed(1) }}
               </span>
             </div>
           </div>
 
-          <h3 class="text-xl font-bold text-gray-900 leading-snug">
-            {{ product.title.split(" ", 2).join(" ") }}
+          <h3 class="text-lg font-bold text-gray-900 leading-snug line-clamp-2">
+            {{ product.title }}
           </h3>
 
           <div class="flex items-center justify-between">
-            <span class="text-2xl font-bold text-gray-900">
+            <span class="text-xl font-bold text-gray-900">
               {{ product.price | currency : "EGP" }}
             </span>
             <button
               (click)="addTocart(product.id)"
-              class="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+              aria-label="Add to cart"
+              class="flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all"
             >
-              <i class="fas fa-shopping-cart"></i>
-              <span>Add</span>
+              <i class="fas fa-shopping-cart text-sm"></i>
+              <span class="text-sm font-medium">Add</span>
             </button>
           </div>
         </div>
-      </div>
+      </article>
       }
     </div>
   </div>

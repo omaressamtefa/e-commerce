@@ -39,6 +39,13 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.authService.logoutUser();
   }
+  navLinks = [
+    { path: '/home', label: 'navbar.home' },
+    { path: '/products', label: 'navbar.products' },
+    { path: '/categories', label: 'navbar.categories' },
+    { path: '/brands', label: 'navbar.brands' },
+    { path: '/wishlist', label: 'navbar.wishlist' },
+  ];
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

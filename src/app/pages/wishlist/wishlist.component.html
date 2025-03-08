@@ -1,91 +1,112 @@
-<section class="py-12 bg-gradient-to-br from-gray-50 to-green-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2
-      class="text-5xl font-bold text-center mb-12 bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent"
-    >
-      Your Wishlist
-    </h2>
+<section
+  class="py-20 bg-gradient-to-br from-slate-50 to-indigo-50 relative overflow-hidden"
+>
+  <div
+    class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDIzLjQzTDQuMjQgMTguNTZjLS4zOC0uMjktLjYyLS43NC0uNi0xLjIyVjQuODRjMC0uNDguMjQtLjkzLjYyLTEuMjJMMTIgLjU3bDcuMzggNC4wNWMuMzguMjkuNjIuNzQuNiAxLjIydjEyLjVjLS4wMi40OC0uMjQuOTMtLjYyIDEuMjJMMTIgMjMuNDN6IiBmaWxsPSIjOGE5Y2NkIiBmaWxsLW9wYWNpdHk9Ii4xIi8+PC9zdmc+')]"
+  ></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-6xl font-black text-center mb-4">
+        <span
+          class="bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent animate-gradient-x"
+        >
+          Wish List
+        </span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Your personally selected collection
+      </p>
+    </div>
 
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
     >
-      @for (product of wishlistItems; track product.id; ) {
+      @for (product of wishlistItems; track product.id) {
       <div
-        class="group relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+        class="group relative bg-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border-2 border-transparent hover:border-indigo-100"
       >
         <div class="relative aspect-square overflow-hidden">
           <img
             [src]="product.imageCover || '/assets/default-image.jpg'"
             [alt]="product.title || 'Product image'"
-            class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
+            class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
           />
           <div
-            class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
-          ></div>
+            class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end p-4"
+          >
+            <button
+              class="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:bg-red-100 transition-colors animate-heart-beat"
+              (click)="removeFromWishlist(product.id)"
+            >
+              <i class="fas fa-heart text-red-600 text-xl"></i>
+            </button>
+            <span
+              class="text-sm font-bold text-white bg-indigo-600/90 px-3 py-1 rounded-full"
+            >
+              {{ product.inStock ? "In Stock" : "Pre-Order" }}
+            </span>
+          </div>
         </div>
 
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gray-900 truncate mb-2">
-            {{ product.title?.split(" ", 2).join(" ") || "Untitled Product" }}
+        <div class="p-6 space-y-4">
+          <h3
+            class="text-xl font-bold text-gray-900 line-clamp-2 min-h-[3.5em]"
+          >
+            {{ product.title?.split(" ", 4).join(" ") || "Untitled Product" }}
           </h3>
 
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between">
             <span
-              class="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent"
+              class="text-2xl font-black bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent"
             >
               {{ product.price | currency : "EGP" }}
             </span>
-            <div class="flex items-center space-x-1">
-              <i class="fas fa-star text-sm text-yellow-400"></i>
-              <span class="text-gray-600">
+            <div
+              class="flex items-center space-x-1 bg-indigo-100 px-2 py-1 rounded-full"
+            >
+              <i class="fas fa-star text-sm text-amber-400"></i>
+              <span class="text-sm font-medium text-indigo-800">
                 {{ product.ratingsAverage?.toFixed(1) || "4.5" }}
               </span>
             </div>
           </div>
-          <div class="flex gap-3">
-            <button
-              (click)="removeFromWishlist(product.id)"
-              class="flex-1 px-4 py-3 bg-red-100 text-red-600 rounded-lg hover:bg-red-600 hover:text-white transition-all"
-              aria-label="Remove from wishlist"
-            >
-              <i class="fas fa-trash mr-2"></i> Remove
-            </button>
+
+          <div class="grid grid-cols-2 gap-3">
             <button
               (click)="addTocartFromWishList(product.id)"
-              class="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
-              aria-label="Add to cart"
+              class="col-span-2 py-3 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-xl transition-all transform hover:-translate-y-0.5 relative overflow-hidden"
             >
-              <i class="fas fa-cart-plus mr-2"></i> Add
+              <div
+                class="absolute inset-0 bg-white/10 opacity-0 hover:opacity-20 transition-opacity"
+              ></div>
+              <i class="fas fa-bolt mr-2"></i> Quick Add
             </button>
           </div>
         </div>
 
-        <div class="absolute top-4 right-4">
-          <div class="p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-md">
-            <i class="fas fa-heart text-red-600 text-xl"></i>
-          </div>
-        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-indigo-100/20 to-cyan-100/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+        ></div>
       </div>
       } @empty {
 
-      <div class="col-span-full text-center py-20">
+      <div class="col-span-full text-center py-24">
         <div class="max-w-md mx-auto">
-          <div
-            class="mb-8 inline-block transform transition-all hover:scale-110"
-          >
+          <div class="relative inline-block mb-8 animate-float">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-indigo-200 to-cyan-200 blur-2xl opacity-30 rounded-full"
+            ></div>
             <i
-              class="fas fa-heart-broken text-8xl text-gray-300 animate-pulse"
+              class="fas fa-heart-circle-plus text-8xl text-indigo-500 relative z-10"
             ></i>
           </div>
-          <h3 class="text-3xl font-bold text-gray-600 mb-4">Empty Wishlist</h3>
-          <p class="text-gray-500 mb-8">
-            Start saving your favorite items here!
-          </p>
+
           <button
             (click)="navigateToProducts()"
-            class="px-8 py-3 bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-xl shadow-lg hover:shadow-xl transition-all"
+            class="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
           >
-            Explore Products
+            <i class="fas fa-sparkles mr-2"></i> Explore Treasures
           </button>
         </div>
       </div>
