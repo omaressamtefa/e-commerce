@@ -18,6 +18,7 @@
     "signUp": " اشتراك",
     "p": " مرحبًا بك مرة أخرى!",
     "forgotPassword": "نسيت كلمة المرور",
-    "login.orContinueWith": "سجل بواسطة"
+    "login.orContinueWith": "سجل بواسطة",
+    "login.noAccount": "ليس لديك حساب؟"
   }
 }

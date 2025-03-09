@@ -18,6 +18,7 @@
     "signUp": " Sign Up",
     "p": " Welcome back! Please enter your details",
     "forgotPassword": "Forgot Password",
-    "login.orContinueWith": "Cotinue With"
+    "login.orContinueWith": "Cotinue With",
+    "login.noAccount": "Don't have an account?"
   }
 }
