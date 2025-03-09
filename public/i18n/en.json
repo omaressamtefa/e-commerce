@@ -17,6 +17,7 @@
     "signIn": "Sign In",
     "signUp": " Sign Up",
     "p": " Welcome back! Please enter your details",
-    "forgotPassword": "Forgot Password"
+    "forgotPassword": "Forgot Password",
+    "login.orContinueWith": "Cotinue With"
   }
 }

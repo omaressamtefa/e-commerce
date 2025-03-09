@@ -17,6 +17,7 @@
     "signIn": "تسجيل الدخول",
     "signUp": " اشتراك",
     "p": " مرحبًا بك مرة أخرى!",
-    "forgotPassword": "نسيت كلمة المرور"
+    "forgotPassword": "نسيت كلمة المرور",
+    "login.orContinueWith": "سجل بواسطة"
   }
 }
