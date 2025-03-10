@@ -30,7 +30,7 @@
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      @for (product of products.slice(0,12) | search : searchText; track
+      @for (product of products.slice(0,40) | search : searchText; track
       product.id) {
       <article
         class="group bg-white border border-indigo-50 rounded-xl p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
@@ -75,7 +75,7 @@
           </div>
 
           <h3 class="text-lg font-bold text-gray-900 leading-snug line-clamp-2">
-            {{ product.title }}
+            {{ product.title.split(" ", 2).join(" ") }}
           </h3>
 
           <div class="flex items-center justify-between">
