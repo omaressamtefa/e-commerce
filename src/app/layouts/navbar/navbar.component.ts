@@ -32,8 +32,10 @@ export class NavbarComponent implements OnInit {
   private readonly myTranslateService = inject(MyTranslateService);
   readonly translateService = inject(TranslateService);
   private readonly cartService = inject(CartService);
+  isSidebarOpen = false;
+  isMobileMenuOpen = false;
   isLogin = input<boolean>(true);
-  isSidebarOpen = true;
+
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -41,9 +43,7 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
+
   ngOnInit(): void {
     if (this.cartService.getToken() !== null)
       this.cartService.getLoggedUserCart().subscribe({
@@ -63,6 +63,17 @@ export class NavbarComponent implements OnInit {
     { path: '/brands', label: 'navbar.brands' },
     { path: '/wishlist', label: 'navbar.wishlist' },
   ];
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
