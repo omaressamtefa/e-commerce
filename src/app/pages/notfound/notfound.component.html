@@ -1,18 +1,66 @@
-<div
-  class="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900"
->
-  <h1
-    class="text-8xl font-extrabold text-gray-900 dark:text-gray-100 drop-shadow-lg"
-  >
-    404
-  </h1>
-  <p class="text-xl text-gray-700 dark:text-gray-300 mt-4">
-    Sorry, the page you’re looking for doesn’t exist.
-  </p>
-  <a
-    routerLink="/home"
-    class="mt-6 px-6 py-3 text-lg font-semibold text-white bg-green-600 rounded-lg shadow-lg hover:bg-green-700 transition-transform transform hover:scale-105"
-  >
-    Back to Home
-  </a>
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="max-w-2xl text-center relative overflow-hidden">
+    <div
+      class="absolute -top-32 -left-32 w-64 h-64 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob dark:hidden"
+    ></div>
+    <div
+      class="absolute -top-32 -right-32 w-64 h-64 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob animation-delay-2000 dark:hidden"
+    ></div>
+
+    <div class="relative space-y-6">
+      <div class="animate-float">
+        <svg
+          class="w-48 h-48 mx-auto text-indigo-600 dark:text-indigo-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+      </div>
+
+      <h1
+        class="text-9xl font-black text-gray-900 dark:text-gray-100 animate-pulse"
+      >
+        4<span class="text-indigo-600">0</span>4
+      </h1>
+
+      <div class="space-y-4">
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-200">
+          Lost in Space?
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+          The page you're looking for seems to not exist.
+        </p>
+      </div>
+
+      <div class="mt-8">
+        <a
+          routerLink="/home"
+          class="inline-flex items-center px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg shadow-indigo-200 dark:shadow-gray-900"
+        >
+          <svg
+            class="w-6 h-6 mr-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            ></path>
+          </svg>
+          Back To Home
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,13 +1,11 @@
 @if(cardDetails.totalCartPrice) {
-<section
-  class="min-h-screen bg-gradient-to-br from-gray-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8"
->
+<section class="md:ml-64 pt-24 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
   <div
-    class="max-w-4xl mx-auto bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200/50 transform perspective-1000"
+    class="max-w-4xl mx-auto bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200/50 dark:border-gray-700/50"
   >
     <div class="text-center mb-10 relative overflow-hidden">
       <div
-        class="absolute inset-0 bg-gradient-to-r from-indigo-100 to-green-100 blur-3xl opacity-30"
+        class="absolute inset-0 bg-gradient-to-r from-indigo-100 to-green-100 dark:from-gray-700 dark:to-gray-800 blur-3xl opacity-30"
       ></div>
       <h1
         class="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-green-500 bg-clip-text text-transparent mb-4 inline-block animate-float"
@@ -15,20 +13,20 @@
         Cart Content
       </h1>
       <div
-        class="flex justify-between items-center bg-indigo-50/80 backdrop-blur-sm p-4 rounded-xl shadow-inner border border-indigo-100"
+        class="flex justify-between items-center bg-indigo-50/80 dark:bg-gray-700/80 backdrop-blur-sm p-4 rounded-xl shadow-inner border border-indigo-100 dark:border-gray-600"
       >
         <div class="flex items-center gap-3">
           <div
-            class="relative w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center"
+            class="relative w-12 h-12 bg-indigo-600 dark:bg-indigo-500 rounded-full flex items-center justify-center"
           >
             <i
               class="fas fa-shopping-basket text-white text-xl animate-bounce"
             ></i>
             <div
-              class="absolute -inset-1.5 border-2 border-indigo-200 rounded-full animate-ping-slow"
+              class="absolute -inset-1.5 border-2 border-indigo-200 dark:border-indigo-400/50 rounded-full animate-ping-slow"
             ></div>
           </div>
-          <h3 class="text-2xl font-semibold text-gray-800">
+          <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">
             {{ cardDetails.totalCartPrice | currency : "EGP" }}
           </h3>
         </div>
@@ -45,11 +43,9 @@
     <div class="space-y-6">
       @for(prod of cardDetails.products; track prod) {
       <div
-        class="group relative flex items-center gap-6 bg-white/95 backdrop-blur-sm p-6 rounded-xl border border-gray-200 hover:border-indigo-200 shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1"
+        class="group relative flex items-center gap-6 bg-white/95 dark:bg-gray-700/50 backdrop-blur-sm p-6 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-indigo-200 dark:hover:border-indigo-400 shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1"
       >
-        <div
-          class="relative w-32 h-32 overflow-hidden rounded-xl shadow-lg transform-style-preserve-3d group-hover:rotate-y-10 transition-transform"
-        >
+        <div class="relative w-32 h-32 overflow-hidden rounded-xl shadow-lg">
           <img
             [src]="prod.product.imageCover"
             [alt]="prod.product.title"
@@ -65,7 +61,7 @@
         >
           <div class="space-y-1">
             <h3
-              class="text-xl font-semibold text-gray-900 hover:text-indigo-600 transition-colors"
+              class="text-xl font-semibold text-gray-900 dark:text-gray-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
               {{ prod.product.title }}
             </h3>
@@ -78,28 +74,30 @@
 
           <div class="flex items-center gap-4">
             <div
-              class="flex items-center gap-2 bg-gray-100 rounded-full p-1.5 shadow-inner"
+              class="flex items-center gap-2 bg-gray-100 dark:bg-gray-600/30 rounded-full p-1.5 shadow-inner"
             >
               <button
                 (click)="updateItem(prod.product.id, prod.count - 1)"
-                class="w-10 h-10 flex items-center justify-center bg-white text-red-600 rounded-full shadow-md hover:bg-red-50 hover:scale-105 transition-all"
+                class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-600 text-red-600 dark:text-red-400 rounded-full shadow-md hover:bg-red-50 dark:hover:bg-red-500/20 hover:scale-105 transition-all"
                 [disabled]="prod.count === 1"
               >
                 <i class="fas fa-minus text-sm"></i>
               </button>
-              <span class="text-lg font-bold text-gray-900 w-6 text-center">
+              <span
+                class="text-lg font-bold text-gray-900 dark:text-gray-100 w-6 text-center"
+              >
                 {{ prod.count }}
               </span>
               <button
                 (click)="updateItem(prod.product.id, prod.count + 1)"
-                class="w-10 h-10 flex items-center justify-center bg-white text-green-600 rounded-full shadow-md hover:bg-green-50 hover:scale-105 transition-all"
+                class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-600 text-green-600 dark:text-green-400 rounded-full shadow-md hover:bg-green-50 dark:hover:bg-green-500/20 hover:scale-105 transition-all"
               >
                 <i class="fas fa-plus text-sm"></i>
               </button>
             </div>
             <button
               (click)="removeItem(prod.product.id)"
-              class="p-2 text-red-600 hover:text-red-700 transition-colors animate-pulse-once"
+              class="p-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-500 transition-colors animate-pulse-once"
               title="Remove item"
             >
               <i class="fas fa-trash-alt"></i>
@@ -110,7 +108,7 @@
       }
     </div>
 
-    <div class="mt-12 border-t border-gray-200 pt-8">
+    <div class="mt-12 border-t border-gray-200 dark:border-gray-600 pt-8">
       <div class="flex flex-col items-center gap-6">
         <button
           [routerLink]="['/checkout', cardDetails._id]"
@@ -122,7 +120,7 @@
           <i class="fas fa-lock mr-2"></i>
           Secure Checkout
         </button>
-        <div class="flex items-center gap-2 text-gray-500">
+        <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
           <i class="fas fa-shield-check"></i>
           <span class="text-sm">256-bit SSL Encryption</span>
         </div>
@@ -133,15 +131,15 @@
 } @else {
 
 <div
-  class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-indigo-50"
+  class="md:ml-64 pt-24 min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900"
 >
   <div class="text-center space-y-8 max-w-2xl px-4 relative items-center">
     <h1
-      class="text-4xl font-bold text-gray-800 bg-gradient-to-r from-indigo-600 to-green-500 bg-clip-text text-transparent"
+      class="text-4xl font-bold text-gray-800 dark:text-gray-100 bg-gradient-to-r from-indigo-600 to-green-500 bg-clip-text text-transparent"
     >
       Cart Vacancy
     </h1>
-    <p class="text-xl text-gray-600 mb-8 max-w-md mx-auto">
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-md mx-auto">
       Your cart is currently staging a peaceful protest - fill it with amazing
       finds!
     </p>

@@ -22,6 +22,8 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import { Iwishlist } from '../../shared/interfaces/iwishlist';
 import { signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { MyTranslateService } from '../../core/services/Mytranslate/MyTranslateService';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +44,8 @@ export class HomeComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly toastrService = inject(ToastrService);
   private readonly wishlistService = inject(WishlistService);
-
+  private readonly myTranslateService = inject(MyTranslateService);
+  readonly translateService = inject(TranslateService);
   searchText: string = '';
   products: IProduct[] = [];
   categories: ICategory[] = [];
@@ -77,7 +80,12 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-
+  change(lang: string): void {
+    this.myTranslateService.changeLangTranslate(lang);
+  }
+  currentLang(lang: string): boolean {
+    return this.translateService.currentLang === lang;
+  }
   getProductsData(): void {
     this.productsService.getAllProducts().subscribe({
       next: (res) => {

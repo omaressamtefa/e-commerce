@@ -1,59 +1,61 @@
-<section
-  class="py-20 bg-gradient-to-br from-green-100 to-green-300 dark:from-gray-900 dark:to-gray-800 transition-all"
->
-  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+<section class="md:ml-64 pt-24 py-20 transition-all">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2
-      class="text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-green-500 to-emerald-700 bg-clip-text text-transparent tracking-wide"
+      class="text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-indigo-600 to-cyan-500 dark:from-indigo-400 bg-clip-text text-transparent tracking-wide"
     >
       Featured Brands
     </h2>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 px-4"
+    >
       @for (brand of brands; track brand._id) {
       <div
-        class="group relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105 p-6 border border-gray-200 dark:border-gray-700 overflow-hidden"
+        class="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 p-5 border border-gray-200/50 dark:border-gray-700/50 overflow-hidden"
       >
         <div
-          class="relative w-full aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800 backdrop-blur-md"
+          class="relative w-full aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-sm"
         >
           <img
             [src]="brand.image"
             [alt]="brand.name"
-            class="w-full h-full object-contain p-4 transform transition-transform duration-500 group-hover:scale-110"
+            class="w-full h-full object-contain p-4 transform transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
           />
           <div
-            class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-gray-700/40"
+            class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-gray-700/40 mix-blend-overlay"
           ></div>
         </div>
 
         <h3
-          class="text-lg font-semibold text-gray-700 dark:text-gray-300 text-center tracking-wide"
+          class="text-lg font-semibold text-indigo-800 dark:text-gray-200 text-center tracking-wide px-2"
         >
           {{ brand.name }}
         </h3>
 
         <div
-          class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl"
+          class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+        ></div>
+
+        <div
+          class="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-1 from-indigo-600 to-cyan-500 dark:from-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         ></div>
       </div>
       } @empty {
-
-      <div class="col-span-full text-center py-20">
-        <div class="max-w-md mx-auto">
+      <div class="col-span-full text-center py-16">
+        <div class="max-w-md mx-auto space-y-6">
           <div
-            class="mb-8 inline-block transform transition-all hover:scale-110"
+            class="inline-block transform transition-all hover:scale-110 animate-bounce"
           >
             <i
-              class="fas fa-copyright text-8xl text-gray-300 animate-pulse"
+              class="fas fa-store-alt text-7xl text-indigo-500/50 dark:text-indigo-600/40"
             ></i>
           </div>
-          <h3
-            class="text-3xl font-extrabold text-gray-700 dark:text-gray-300 mb-4"
-          >
-            No Brands Found
+          <h3 class="text-3xl font-bold text-gray-700 dark:text-gray-300">
+            No Brands Available
           </h3>
           <p class="text-gray-500 dark:text-gray-400 text-lg">
-            Check back later for featured brands.
+            Stay tuned - exciting brands coming soon!
           </p>
         </div>
       </div>

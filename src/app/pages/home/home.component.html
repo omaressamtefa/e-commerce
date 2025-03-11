@@ -1,232 +1,242 @@
-<section class="py-16 bg-indigo-50">
-  <div class="container mx-auto px-4 md:px-6">
-    <div class="grid md:grid-cols-[minmax(0,1fr)_400px] gap-6">
-      <div
-        class="relative group overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-indigo-100/50"
-      >
-        <owl-carousel-o [options]="customMainSlider">
-          @for (image of sliderImages; track image) {
-          <ng-template carouselSlide>
-            <div class="relative aspect-video overflow-hidden">
-              <img
-                [src]="image"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                alt="Seasonal special offers"
-                loading="lazy"
-              />
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-indigo-900/50 to-transparent flex items-end p-6"
-              >
-                <div class="text-white space-y-2">
-                  <h3 class="text-3xl font-bold tracking-tight drop-shadow-lg">
-                    Seasonal Specials
-                  </h3>
-                  <p class="text-lg font-light opacity-95">
-                    Curated selections for your pantry
-                  </p>
+<main class="md:ml-64 pt-24 min-h-screen transition-all duration-300">
+  <section class="py-16">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid md:grid-cols-[minmax(0,1fr)_400px] gap-6">
+        <div
+          class="relative group overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-2 border-indigo-100/50"
+        >
+          <owl-carousel-o [options]="customMainSlider">
+            @for (image of sliderImages; track image) {
+            <ng-template carouselSlide>
+              <div class="relative aspect-video overflow-hidden">
+                <img
+                  [src]="image"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt="Seasonal special offers"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-indigo-900/50 to-transparent flex items-end p-6"
+                >
+                  <div class="text-white space-y-2">
+                    <h3
+                      class="text-3xl font-bold tracking-tight drop-shadow-lg"
+                    >
+                      Seasonal Specials
+                    </h3>
+                    <p class="text-lg font-light opacity-95">
+                      Curated selections for your pantry
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="absolute top-4 left-4 bg-white/95 px-4 py-1.5 rounded-full text-sm font-semibold text-indigo-700 shadow-lg backdrop-blur-sm border border-indigo-100"
+                >
+                  <i class="fas fa-sparkles mr-2"></i>Featured Collection
                 </div>
               </div>
-              <div
-                class="absolute top-4 left-4 bg-white/95 px-4 py-1.5 rounded-full text-sm font-semibold text-indigo-700 shadow-lg backdrop-blur-sm border border-indigo-100"
+            </ng-template>
+            }
+          </owl-carousel-o>
+        </div>
+
+        <div class="flex flex-col gap-5">
+          <div
+            class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-indigo-100/50 group"
+          >
+            <img
+              src="/images/grocery-banner.png"
+              class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+              alt="Fresh vegetables"
+              loading="lazy"
+            />
+            <div
+              class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-indigo-900/60 to-transparent"
+            >
+              <h4 class="text-xl font-bold text-white mb-1">
+                Farm Fresh Vegetables
+              </h4>
+              <p class="text-indigo-100 font-medium">
+                Daily harvested from local farms
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-indigo-100/50 group"
+          >
+            <img
+              src="/images/grocery-banner-2.jpeg"
+              class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+              alt="Organic products"
+              loading="lazy"
+            />
+            <div
+              class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-indigo-900/60 to-transparent"
+            >
+              <h4 class="text-xl font-bold text-white mb-1">
+                Organic Essentials
+              </h4>
+              <p class="text-indigo-100 font-medium">
+                Certified quality products
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4 md:px-6">
+      <header class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+          Explore
+          <span
+            class="text-indigo-600 underline decoration-2 underline-offset-8 decoration-wavy"
+          >
+            Categories
+          </span>
+        </h2>
+        <p class="text-gray-600 md:text-lg max-w-2xl mx-auto">
+          Discover our diverse range of product collections
+        </p>
+      </header>
+
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4"
+      >
+        @for (category of categories; track category._id) {
+        <div
+          class="group relative bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-indigo-100/50"
+        >
+          <div
+            class="relative aspect-square w-full mb-4 overflow-hidden rounded-xl"
+          >
+            <img
+              [src]="category.image"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              alt="{{ category.name }}"
+              loading="lazy"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-indigo-900/40 to-transparent"
+            ></div>
+          </div>
+          <h3 class="text-lg font-semibold text-center text-indigo-900 px-2">
+            {{ category.name }}
+          </h3>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <header class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+          Trending
+          <span
+            class="text-indigo-600 underline decoration-2 underline-offset-8 decoration-wavy"
+          >
+            Products
+          </span>
+        </h2>
+        <p class="text-gray-600 md:text-lg max-w-2xl mx-auto">
+          Discover our most popular items loved by customers
+        </p>
+      </header>
+
+      <div class="max-w-3xl mx-auto mb-12">
+        <div class="relative">
+          <input
+            [(ngModel)]="searchText"
+            type="search"
+            placeholder="Search products..."
+            aria-label="Product search"
+            class="w-full pl-14 pr-5 py-3.5 text-base rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 shadow-sm transition-all"
+          />
+          <i
+            class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-indigo-500 text-lg"
+          ></i>
+        </div>
+      </div>
+
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        @for (product of products.slice(0,12) | search : searchText; track
+        product.id) {
+        <div
+          class="group bg-white border-2 border-indigo-100/50 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+        >
+          <button
+            (click)="toggleWishlist(product._id)"
+            aria-label="Toggle wishlist"
+            class="absolute top-4 right-4 z-10 p-2.5 bg-white/90 backdrop-blur rounded-full shadow-sm hover:bg-red-50 transition-colors"
+            [class.text-red-600]="wishlistIds().includes(product._id)"
+          >
+            <i class="fas fa-heart text-lg"></i>
+          </button>
+
+          <a
+            [routerLink]="['/details', product._id]"
+            class="block relative aspect-square overflow-hidden rounded-xl mb-5"
+          >
+            <img
+              [src]="product.imageCover"
+              [alt]="product.title"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"
+            ></div>
+          </a>
+
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span
+                class="text-sm font-semibold text-indigo-600 uppercase tracking-wide"
               >
-                <i class="fas fa-sparkles mr-2"></i>Featured Collection
+                {{ product.category?.name || "Uncategorized" }}
+              </span>
+              <div
+                class="flex items-center gap-1 text-amber-400"
+                [class.flex-row-reverse]="currentLang('ar')"
+              >
+                <i class="fas fa-star text-sm"></i>
+                <span class="text-gray-700 font-medium">{{
+                  (product.ratingsAverage || 0).toFixed(1)
+                }}</span>
               </div>
             </div>
-          </ng-template>
-          }
-        </owl-carousel-o>
-      </div>
 
-      <div class="flex flex-col gap-5">
-        <div
-          class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-indigo-100/50 group"
-        >
-          <img
-            src="/images/grocery-banner.png"
-            class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-            alt="Fresh vegetables"
-            loading="lazy"
-          />
-          <div
-            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-indigo-900/60 to-transparent"
-          >
-            <h4 class="text-xl font-bold text-white mb-1">
-              Farm Fresh Vegetables
-            </h4>
-            <p class="text-indigo-100 font-medium">
-              Daily harvested from local farms
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-indigo-100/50 group"
-        >
-          <img
-            src="/images/grocery-banner-2.jpeg"
-            class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-            alt="Organic products"
-            loading="lazy"
-          />
-          <div
-            class="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-indigo-900/60 to-transparent"
-          >
-            <h4 class="text-xl font-bold text-white mb-1">
-              Organic Essentials
-            </h4>
-            <p class="text-indigo-100 font-medium">
-              Certified quality products
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-16 bg-gradient-to-br from-indigo-50 to-purple-50">
-  <div class="container mx-auto px-4 md:px-6">
-    <header class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-        Explore
-        <span
-          class="text-indigo-600 underline decoration-2 underline-offset-8 decoration-wavy"
-        >
-          Categories
-        </span>
-      </h2>
-      <p class="text-gray-600 md:text-lg max-w-2xl mx-auto">
-        Discover our diverse range of product collections
-      </p>
-    </header>
-
-    <div
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 px-4"
-    >
-      @for (category of categories; track category._id) {
-      <div
-        class="group relative bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-indigo-100/50"
-      >
-        <div
-          class="relative aspect-square w-full mb-4 overflow-hidden rounded-xl"
-        >
-          <img
-            [src]="category.image"
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            alt="{{ category.name }}"
-            loading="lazy"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-indigo-900/40 to-transparent"
-          ></div>
-        </div>
-        <h3 class="text-lg font-semibold text-center text-indigo-900 px-2">
-          {{ category.name }}
-        </h3>
-      </div>
-      }
-    </div>
-  </div>
-</section>
-
-<section class="py-16 bg-white">
-  <div class="container mx-auto px-4 md:px-6">
-    <header class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
-        Trending
-        <span
-          class="text-indigo-600 underline decoration-2 underline-offset-8 decoration-wavy"
-        >
-          Products
-        </span>
-      </h2>
-      <p class="text-gray-600 md:text-lg max-w-2xl mx-auto">
-        Discover our most popular items loved by customers
-      </p>
-    </header>
-
-    <div class="max-w-3xl mx-auto mb-12">
-      <div class="relative">
-        <input
-          [(ngModel)]="searchText"
-          type="search"
-          placeholder="Search products..."
-          aria-label="Product search"
-          class="w-full pl-14 pr-5 py-3.5 text-base rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 shadow-sm transition-all"
-        />
-        <i
-          class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-indigo-500 text-lg"
-        ></i>
-      </div>
-    </div>
-
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-    >
-      @for (product of products.slice(0,12) | search : searchText; track
-      product.id) {
-      <div
-        class="group bg-white border-2 border-indigo-100/50 rounded-xl p-5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-      >
-        <button
-          (click)="toggleWishlist(product._id)"
-          aria-label="Toggle wishlist"
-          class="absolute top-4 right-4 z-10 p-2.5 bg-white/90 backdrop-blur rounded-full shadow-sm hover:bg-red-50 transition-colors"
-          [class.text-red-600]="wishlistIds().includes(product._id)"
-        >
-          <i class="fas fa-heart text-lg"></i>
-        </button>
-
-        <a
-          [routerLink]="['/details', product._id]"
-          class="block relative aspect-square overflow-hidden rounded-xl mb-5"
-        >
-          <img
-            [src]="product.imageCover"
-            [alt]="product.title"
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"
-          ></div>
-        </a>
-
-        <div class="space-y-4">
-          <div class="flex items-center justify-between">
-            <span
-              class="text-sm font-semibold text-indigo-600 uppercase tracking-wide"
+            <h3
+              class="text-lg font-bold text-gray-900 leading-snug line-clamp-2"
             >
-              {{ product.category?.name || "Uncategorized" }}
-            </span>
-            <div class="flex items-center gap-1 text-amber-400">
-              <i class="fas fa-star text-sm"></i>
-              <span class="text-gray-700 font-medium">{{
-                (product.ratingsAverage || 0).toFixed(1)
-              }}</span>
+              {{ product.title.split(" ", 2).join(" ") }}
+            </h3>
+
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-gray-900">
+                {{ product.price | currency : "EGP" }}
+              </span>
+              <button
+                (click)="addTocart(product.id)"
+                [class.flex-row-reverse]="currentLang('ar')"
+                aria-label="Add to cart"
+                class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all"
+              >
+                <i class="fas fa-cart-plus text-sm"></i>
+                <span class="text-sm font-medium">Add</span>
+              </button>
             </div>
           </div>
-
-          <h3 class="text-lg font-bold text-gray-900 leading-snug line-clamp-2">
-            {{ product.title.split(" ", 2).join(" ") }}
-          </h3>
-
-          <div class="flex items-center justify-between">
-            <span class="text-xl font-bold text-gray-900">
-              {{ product.price | currency : "EGP" }}
-            </span>
-            <button
-              (click)="addTocart(product.id)"
-              aria-label="Add to cart"
-              class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all"
-            >
-              <i class="fas fa-cart-plus text-sm"></i>
-              <span class="text-sm font-medium">Add</span>
-            </button>
-          </div>
         </div>
+        }
       </div>
-      }
     </div>
-  </div>
-</section>
+  </section>
+</main>

@@ -9,6 +9,8 @@ import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../shared/pipes/search/search.pipe';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import { Iwishlist } from '../../shared/interfaces/iwishlist';
+import { TranslateService } from '@ngx-translate/core';
+import { MyTranslateService } from '../../core/services/Mytranslate/MyTranslateService';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +23,8 @@ export class ProductsComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly toastrService = inject(ToastrService);
   private readonly wishlistService = inject(WishlistService);
+  private readonly myTranslateService = inject(MyTranslateService);
+  readonly translateService = inject(TranslateService);
   wishlistDetails = signal<IProduct[]>([]);
   wishlistIds = signal<string[]>([]);
 
@@ -43,7 +47,12 @@ export class ProductsComponent implements OnInit {
       },
     });
   }
-
+  change(lang: string): void {
+    this.myTranslateService.changeLangTranslate(lang);
+  }
+  currentLang(lang: string): boolean {
+    return this.translateService.currentLang === lang;
+  }
   getProductsData(): void {
     this.productsService.getAllProducts().subscribe({
       next: (res) => {

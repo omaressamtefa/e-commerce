@@ -8,7 +8,12 @@ import {
   OnInit,
   Signal,
 } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MyTranslateService } from '../../core/services/Mytranslate/MyTranslateService';
 import { CartService } from '../../core/services/cart/cart.service';
@@ -28,6 +33,17 @@ export class NavbarComponent implements OnInit {
   readonly translateService = inject(TranslateService);
   private readonly cartService = inject(CartService);
   isLogin = input<boolean>(true);
+  isSidebarOpen = true;
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isSidebarOpen = false;
+      }
+    });
+  }
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
   ngOnInit(): void {
     if (this.cartService.getToken() !== null)
       this.cartService.getLoggedUserCart().subscribe({
@@ -38,6 +54,7 @@ export class NavbarComponent implements OnInit {
   }
   logout(): void {
     this.authService.logoutUser();
+    this.isSidebarOpen = false;
   }
   navLinks = [
     { path: '/home', label: 'navbar.home' },

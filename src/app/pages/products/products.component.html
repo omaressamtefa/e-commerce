@@ -1,44 +1,46 @@
-<section class="py-16 bg-white">
-  <div class="container mx-auto px-4 md:px-6">
+<section class="md:ml-64 pt-24 p-4 min-h-screen transition-all duration-300">
+  <div class="container mx-auto px-4 md:px-8">
     <header class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+      <h2
+        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-3"
+      >
         Trending
         <span
-          class="text-indigo-600 underline decoration-2 underline-offset-8 decoration-wavy"
+          class="text-indigo-600 dark:text-indigo-400 underline decoration-2 underline-offset-8 decoration-wavy"
         >
           Products
         </span>
       </h2>
-      <p class="text-gray-600 md:text-lg max-w-2xl mx-auto">
+      <p class="text-gray-600 dark:text-gray-400 md:text-lg max-w-2xl mx-auto">
         Discover our most popular items loved by customers
       </p>
     </header>
 
-    <div class="max-w-3xl mx-auto mb-12">
-      <div class="relative">
+    <div class="mb-12">
+      <div class="relative max-w-2xl mx-auto">
         <input
           [(ngModel)]="searchText"
           type="search"
           placeholder="Search products..."
           aria-label="Product search"
-          class="w-full pl-14 pr-5 py-3.5 text-base rounded-xl border-2 border-indigo-100 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 shadow-sm transition-all"
+          class="w-full pl-14 pr-5 py-3.5 text-base rounded-xl border-2 border-indigo-100 dark:border-gray-700 focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-gray-600 shadow-sm transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
         />
         <i
-          class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-indigo-500 text-lg"
+          class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-indigo-500 dark:text-indigo-400 text-lg"
         ></i>
       </div>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
       @for (product of products.slice(0,40) | search : searchText; track
       product.id) {
       <article
-        class="group bg-white border border-indigo-50 rounded-xl p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+        class="group bg-white dark:bg-gray-800 border border-indigo-50 dark:border-gray-700 rounded-xl p-5 shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
       >
         <button
           (click)="toggleWishlist(product._id)"
           aria-label="Toggle wishlist"
-          class="absolute top-3.5 right-3.5 z-10 p-2.5 bg-white/90 backdrop-blur rounded-full shadow-sm hover:bg-red-50 transition-colors"
+          class="absolute top-3.5 right-3.5 z-10 p-2.5 bg-white/90 dark:bg-gray-700/90 backdrop-blur rounded-full shadow-sm hover:bg-red-50 dark:hover:bg-red-500/20 transition-colors"
           [class.text-red-600]="wishlistIds().includes(product._id)"
         >
           <i class="fas fa-heart text-lg"></i>
@@ -51,7 +53,7 @@
           <img
             [src]="product.imageCover"
             [alt]="product.title"
-            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
           <div
@@ -62,30 +64,36 @@
         <div class="space-y-4">
           <div class="flex items-center justify-between">
             <span
-              class="text-sm font-semibold text-indigo-600 uppercase tracking-wide"
+              class="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide"
             >
               {{ product.category?.name || "Uncategorized" }}
             </span>
-            <div class="flex items-center space-x-1.5">
+            <div
+              class="flex items-center space-x-1.5"
+              [class.flex-row-reverse]="currentLang('ar')"
+            >
               <i class="fas fa-star text-sm text-amber-400"></i>
-              <span class="text-gray-700 font-medium">
+              <span class="text-gray-700 dark:text-gray-300 font-medium">
                 {{ (product.ratingsAverage || 0).toFixed(1) }}
               </span>
             </div>
           </div>
 
-          <h3 class="text-lg font-bold text-gray-900 leading-snug line-clamp-2">
+          <h3
+            class="text-lg font-bold text-gray-900 dark:text-gray-100 leading-snug line-clamp-2"
+          >
             {{ product.title.split(" ", 2).join(" ") }}
           </h3>
 
           <div class="flex items-center justify-between">
-            <span class="text-xl font-bold text-gray-900">
+            <span class="text-xl font-bold text-gray-900 dark:text-gray-100">
               {{ product.price | currency : "EGP" }}
             </span>
             <button
               (click)="addTocart(product.id)"
               aria-label="Add to cart"
-              class="flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all"
+              [class.flex-row-reverse]="currentLang('ar')"
+              class="flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all"
             >
               <i class="fas fa-shopping-cart text-sm"></i>
               <span class="text-sm font-medium">Add</span>
